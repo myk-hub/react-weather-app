@@ -1,73 +1,36 @@
 import React, { useState } from "react";
-import styled from "styled-components";
-import Axios from "axios";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import CityComponent from "./components/CityComponent";
-import WeatherComponent from "./components/WeatherInfoComponent";
+import Signup from "./components/Signup";
+import Home from "./components/Home";
 
 export const WeatherIcons = {
-  "01d": "/react-weather-app/icons/sunny.svg",
-  "01n": "/react-weather-app/icons/night.svg",
-  "02d": "/react-weather-app/icons/day.svg",
-  "02n": "/react-weather-app/icons/cloudy-night.svg",
-  "03d": "/react-weather-app/icons/cloudy.svg",
-  "03n": "/react-weather-app/icons/cloudy.svg",
-  "04d": "/react-weather-app/icons/perfect-day.svg",
-  "04n": "/react-weather-app/icons/cloudy-night.svg",
-  "09d": "/react-weather-app/icons/rain.svg",
-  "09n": "/react-weather-app/icons/rain-night.svg",
-  "10d": "/react-weather-app/icons/rain.svg",
-  "10n": "/react-weather-app/icons/rain-night.svg",
-  "11d": "/react-weather-app/icons/storm.svg",
-  "11n": "/react-weather-app/icons/storm.svg",
+  "01d": "/src/icons/sunny.svg",
+  "01n": "/src/icons/night.svg",
+  "02d": "/src/icons/day.svg",
+  "02n": "/src/icons/cloudy-night.svg",
+  "03d": "/src/icons/cloudy.svg",
+  "03n": "/src/icons/cloudy.svg",
+  "04d": "/src/icons/perfect-day.svg",
+  "04n": "/src/icons/cloudy-night.svg",
+  "09d": "/src/icons/rain.svg",
+  "09n": "/src/icons/rain-night.svg",
+  "10d": "/src/icons/rain.svg",
+  "10n": "/src/icons/rain-night.svg",
+  "11d": "/src/icons/storm.svg",
+  "11n": "/src/icons/storm.svg",
 } as any;
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 380px;
-  padding: 20px 10px;
-  margin: auto;
-  border-radius: 4px;
-  box-shadow: 0 3px 6px 0 #555;
-  background: white;
-  font-family: Montserrat;
-`;
-
-const AppLabel = styled.span`
-  color: black;
-  margin: 20px auto;
-  font-size: 18px;
-  font-weight: bold;
-`;
-const CloseButton = styled.span`
-  padding: 2px 3px;
-  background-color: black;
-  border-radius: 50%;
-  color: white;
-  position: absolute;
-`;
-
 function App() {
-  const [city, updateCity] = useState();
-  const [weather, updateWeather] = useState();
-  const fetchWeather = async (e: any) => {
-    e.preventDefault();
-    const response = await Axios.get(
-      `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=fe4feefa8543e06d4f3c66d92c61b69c`,
-    );
-    updateWeather(response.data);
-  };
   return (
-    <Container>
-      <AppLabel>React Weather App</AppLabel>
-      {city && weather ? (
-        <WeatherComponent weather={weather} city={city} />
-      ) : (
-        <CityComponent updateCity={updateCity} fetchWeather={fetchWeather} />
-      )}
-    </Container>
+    <Router>
+      <div className="App">
+        <Routes>
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/home" element={<Home />} />
+        </Routes>
+      </div>
+  </Router>
   );
 }
 

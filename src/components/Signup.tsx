@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 // @ts-ignore
 import { useNavigate } from 'react-router-dom';
 
-const Signup: React.FC = () => {
+const Signup = () => {
   const [email, setEmail] = useState('');
   const history = useNavigate();
 
