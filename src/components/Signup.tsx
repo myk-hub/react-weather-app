@@ -1,12 +1,27 @@
-import React, { useState } from 'react';
-// @ts-ignore
+import React, { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import styled from "styled-components";
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
 
-const Signup = () => {
-  const [email, setEmail] = useState('');
-  const history = useNavigate();
+const SignupForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10vh 10vw;
+`;
 
-  const handleSignup = () => {
+type IProps = {
+  email: string;
+  setEmail: (email: string) => void;
+};
+
+const Signup = ({ email, setEmail }: IProps) => {
+  const navigate = useNavigate();
+
+  const handleSignup = React.useCallback(() => {
     // Perform client-side validation
     if (!validateEmail(email)) {
       alert('Please enter a valid email address.');
@@ -14,9 +29,8 @@ const Signup = () => {
     }
 
     // Redirect to home page after successful signup
-    // @ts-ignore
-    history.push('/home');
-  };
+    navigate('/home');
+  }, [email]);
 
   const validateEmail = (email: string): boolean => {
     // Simple email validation regex
@@ -25,16 +39,30 @@ const Signup = () => {
   };
 
   return (
-    <div>
-      <h2>Sign Up</h2>
-      <input
-        type="email"
-        placeholder="Enter your email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <button onClick={handleSignup}>Sign Up</button>
-    </div>
+    <SignupForm>
+      <Stack spacing={3} direction="column">
+        <Typography>Please proide your email to continue</Typography>
+        {/* @ts-ignore */ }
+        <TextField 
+          id="outlined-basic"
+          label="Email"
+          variant="outlined"
+          type="email"
+          placeholder="Enter your email"
+          value={email}
+          onChange={(e: any) => setEmail(e.target.value)} 
+        />
+        {/* @ts-ignore */ }
+        <Button 
+          type="email"
+          placeholder="Enter your email"
+          value={email}
+          onClick={handleSignup} variant="contained"
+          >
+            SignUp
+        </Button>
+      </Stack>
+    </SignupForm>
   );
 };
 

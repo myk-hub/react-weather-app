@@ -29,23 +29,26 @@ const SearchBox = styled.form`
     font-weight: bold;
   }
 `;
+
 const ChooseCityLabel = styled.span`
   color: black;
   margin: 10px auto;
   font-size: 18px;
   font-weight: bold;
 `;
+
 const WelcomeWeatherLogo = styled.img`
   width: 140px;
   height: 140px;
   margin: 40px auto;
 `;
 
-const CityComponent = (props: any) => {
-  const { updateCity, fetchWeather } = props;
+const CityComponent = ({ updateCity, fetchWeather }: {
+  updateCity: Function; fetchWeather: any;
+}) => {
   return (
     <>
-      <WelcomeWeatherLogo src={"/src/icons/perfect-day.svg"} />
+      <WelcomeWeatherLogo src={"/react-weather-app/icons/perfect-day.svg"} />
       <ChooseCityLabel>Find Weather of your city</ChooseCityLabel>
       <SearchBox onSubmit={fetchWeather}>
         <input

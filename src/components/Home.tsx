@@ -13,8 +13,6 @@ const Container = styled.div`
   width: 380px;
   padding: 20px 10px;
   margin: auto;
-  border-radius: 4px;
-  box-shadow: 0 3px 6px 0 #555;
   background: white;
   font-family: Montserrat;
 `;
@@ -25,6 +23,7 @@ const AppLabel = styled.span`
   font-size: 18px;
   font-weight: bold;
 `;
+
 const CloseButton = styled.span`
   padding: 2px 3px;
   background-color: black;
@@ -33,8 +32,11 @@ const CloseButton = styled.span`
   position: absolute;
 `;
 
+type IProps = {
+  email: string;
+}
 
-const Home = () => {
+const Home = ({ email }: IProps) => {
   const [city, updateCity] = useState();
   const [weather, updateWeather] = useState();
   const fetchWeather = async (e: any) => {
@@ -47,7 +49,7 @@ const Home = () => {
 
   return (
     <Container>
-      <AppLabel>React Weather App</AppLabel>
+      <AppLabel>User: {email}</AppLabel>
       {city && weather ? (
         <WeatherComponent weather={weather} city={city} />
       ) : (
