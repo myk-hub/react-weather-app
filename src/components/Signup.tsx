@@ -1,6 +1,7 @@
-import React, { useCallback, useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
+
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -29,20 +30,19 @@ const Signup = ({ email, setEmail }: IProps) => {
     }
 
     // Redirect to home page after successful signup
-    navigate('/home');
+    navigate('/');
   }, [email]);
 
-  const validateEmail = (email: string): boolean => {
+  const validateEmail = React.useCallback((email: string): boolean => {
     // Simple email validation regex
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
-  };
+  }, [email]);
 
   return (
     <SignupForm>
       <Stack spacing={3} direction="column">
-        <Typography>Please proide your email to continue</Typography>
-        {/* @ts-ignore */ }
+        <Typography>{'Please proide your email to continue'}</Typography>
         <TextField 
           id="outlined-basic"
           label="Email"
@@ -52,14 +52,12 @@ const Signup = ({ email, setEmail }: IProps) => {
           value={email}
           onChange={(e: any) => setEmail(e.target.value)} 
         />
-        {/* @ts-ignore */ }
         <Button 
-          type="email"
-          placeholder="Enter your email"
           value={email}
-          onClick={handleSignup} variant="contained"
-          >
-            SignUp
+          onClick={handleSignup}
+          variant="contained"
+        >
+          {'SignUp'}
         </Button>
       </Stack>
     </SignupForm>

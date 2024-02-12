@@ -1,8 +1,9 @@
-import React from "react";
+import React, { SyntheticEvent } from "react";
 import styled from "styled-components";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import LocationSearchingIcon from '@mui/icons-material/LocationSearching';
+
 
 const SearchBox = styled.form`
   display: flex;
@@ -25,23 +26,23 @@ const WelcomeWeatherLogo = styled.img`
 `;
 
 const CityComponent = ({ updateCity, fetchWeather }: {
-  updateCity: Function; fetchWeather: any;
-}) => {
-  return (
-    <>
-      <WelcomeWeatherLogo src={"/react-weather-app/icons/perfect-day.svg"} />
-      <ChooseCityLabel>Find Weather of your city</ChooseCityLabel>
-      <SearchBox onSubmit={fetchWeather}>
-        <TextField 
-            id="outlined-basic"
-            label="City"
-            variant="standard"
-            placeholder="Enter your city"
-            onChange={(e: any) => updateCity(e.target.value)}
-          />
-        <Button startIcon={<LocationSearchingIcon />} type={"submit"}>Search</Button>
-      </SearchBox>
-    </>
-  );
-};
+  updateCity: Function;
+  fetchWeather: (e: SyntheticEvent) => Promise<void>;
+}) => (
+  <>
+    <WelcomeWeatherLogo src={`${process.env.PUBLIC_URL}/icons/perfect-day.svg`} />
+    <ChooseCityLabel>Find Weather of your city</ChooseCityLabel>
+    <SearchBox onSubmit={fetchWeather}>
+      <TextField 
+          id="outlined-basic"
+          label="City"
+          variant="standard"
+          placeholder="Enter your city"
+          onChange={(e: any) => updateCity(e.target.value)}
+        />
+      <Button startIcon={<LocationSearchingIcon />} type={"submit"}>Search</Button>
+    </SearchBox>
+  </>
+);
+
 export default CityComponent;

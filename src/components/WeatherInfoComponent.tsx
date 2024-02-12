@@ -1,13 +1,14 @@
 import React from "react";
 import styled from "styled-components";
+
 import { WeatherIcons } from "../App";
 
 export const WeatherInfoIcons = {
-  sunset: "./react-weather-app/icons/temp.svg",
-  sunrise: "./react-weather-app/icons/temp.svg",
-  humidity: "./react-weather-app/icons/humidity.svg",
-  wind: "/react-weather-app/icons/wind.svg",
-  pressure: "/react-weather-app/icons/pressure.svg",
+  sunset: `${process.env.PUBLIC_URL}/icons/temp.svg`,
+  sunrise: `${process.env.PUBLIC_URL}/icons/temp.svg`,
+  humidity: `${process.env.PUBLIC_URL}/icons/humidity.svg`,
+  wind: `${process.env.PUBLIC_URL}/icons/wind.svg`,
+  pressure: `${process.env.PUBLIC_URL}/icons/pressure.svg`,
 } as any;
 
 const Location = styled.span`
@@ -83,7 +84,12 @@ const InfoLabel = styled.span`
   }
 `;
 
-const WeatherInfoComponent = ({ name, value }: any) => {
+type IWeatherInfoComponent = {
+  name: string;
+  value: string;
+}
+
+const WeatherInfoComponent = ({ name, value }: IWeatherInfoComponent) => {
   return (
     <InfoContainer>
       <InfoIcon src={WeatherInfoIcons[name]}/>
@@ -95,7 +101,12 @@ const WeatherInfoComponent = ({ name, value }: any) => {
   );
 };
 
-const WeatherComponent = ({ weather }: any) => {
+
+type IWeatherComponent = {
+  [key: string]: any;
+}
+
+const WeatherComponent = ({ weather }: IWeatherComponent) => {
   const isDay = weather?.weather[0].icon?.includes('d')
   const getTime = (timeStamp: any) => {
     return `${new Date(timeStamp * 1000).getHours()} : ${new Date(timeStamp * 1000).getMinutes()}`
