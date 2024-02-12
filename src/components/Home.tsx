@@ -2,6 +2,7 @@ import React, { SyntheticEvent, useEffect, useState } from 'react';
 import axios from 'axios';
 import styled from "styled-components";
 import { useNavigate } from 'react-router-dom';
+import Avatar from '@mui/material/Avatar';
 
 import WeatherComponent from './WeatherInfoComponent';
 import CityComponent from './CityComponent';
@@ -19,6 +20,10 @@ const Container = styled.div`
 
 const AppLabel = styled.span`
   color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   margin: 20px auto;
   font-size: 18px;
   font-weight: bold;
@@ -55,7 +60,9 @@ const Home = ({ email }: IProps) => {
 
   return (
     <Container>
-      <AppLabel>User: {email}</AppLabel>
+      <AppLabel>
+        <Avatar></Avatar>{email}
+      </AppLabel>
       {city && weather ? (
         <WeatherComponent weather={weather} city={city} />
       ) : (
